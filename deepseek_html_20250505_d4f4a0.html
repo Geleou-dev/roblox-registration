@@ -1,0 +1,171 @@
+<!DOCTYPE html>
+<html lang="uk">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Roblox-стиль | Учебный проект</title>
+    <style>
+        :root {
+            --primary: #ff6b6b;
+            --secondary: #4287f5;
+            --dark: #2d2d2d;
+        }
+        
+        body {
+            font-family: 'Segoe UI', Arial, sans-serif;
+            background: url('https://tr.rbxcdn.com/7d3eb136e5c0b2f5a3b375e355d70e6a/768/432/Image/Png') no-repeat center/cover;
+            margin: 0;
+            height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            color: white;
+        }
+
+        .container {
+            background: rgba(45, 45, 45, 0.9);
+            padding: 30px;
+            border-radius: 10px;
+            width: 350px;
+            box-shadow: 0 0 20px rgba(0, 0, 0, 0.5);
+            text-align: center;
+        }
+
+        .logo {
+            width: 150px;
+            margin-bottom: 20px;
+        }
+
+        .tabs {
+            display: flex;
+            margin-bottom: 20px;
+        }
+
+        .tab {
+            flex: 1;
+            padding: 10px;
+            cursor: pointer;
+            background: #3a3a3a;
+        }
+
+        .tab.active {
+            background: var(--primary);
+        }
+
+        .form-group {
+            margin-bottom: 15px;
+            text-align: left;
+        }
+
+        input {
+            width: 100%;
+            padding: 12px;
+            border: none;
+            border-radius: 5px;
+            margin-top: 5px;
+            box-sizing: border-box;
+        }
+
+        button {
+            width: 100%;
+            padding: 12px;
+            border: none;
+            border-radius: 5px;
+            background: var(--primary);
+            color: white;
+            font-weight: bold;
+            cursor: pointer;
+            margin-top: 10px;
+        }
+
+        button:hover {
+            opacity: 0.9;
+        }
+
+        .hidden {
+            display: none;
+        }
+
+        .footer {
+            margin-top: 20px;
+            font-size: 12px;
+            color: #aaa;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <img src="https://tr.rbxcdn.com/7d3eb136e5c0b2f5a3b375e355d70e6a/768/432/Image/Png" alt="Logo" class="logo">
+        
+        <div class="tabs">
+            <div class="tab active" onclick="switchTab('login')">Вход</div>
+            <div class="tab" onclick="switchTab('register')">Регистрация</div>
+        </div>
+
+        <div id="login-form">
+            <div class="form-group">
+                <label>Имя пользователя</label>
+                <input type="text" id="login-username" placeholder="Введите ваш никнейм">
+            </div>
+            <div class="form-group">
+                <label>Пароль</label>
+                <input type="password" id="login-password" placeholder="Введите пароль">
+            </div>
+            <button onclick="fakeLogin()">Войти</button>
+        </div>
+
+        <div id="register-form" class="hidden">
+            <div class="form-group">
+                <label>Имя пользователя</label>
+                <input type="text" id="reg-username" placeholder="Придумайте никнейм">
+            </div>
+            <div class="form-group">
+                <label>Пароль</label>
+                <input type="password" id="reg-password" placeholder="Не менее 8 символов">
+            </div>
+            <div class="form-group">
+                <label>Подтвердите пароль</label>
+                <input type="password" id="reg-confirm" placeholder="Повторите пароль">
+            </div>
+            <button onclick="fakeRegister()">Создать аккаунт</button>
+        </div>
+
+        <div class="footer">
+            Это учебный проект. Никакие данные не сохраняются.
+        </div>
+    </div>
+
+    <script>
+        function switchTab(tabName) {
+            document.getElementById('login-form').classList.toggle('hidden', tabName !== 'login');
+            document.getElementById('register-form').classList.toggle('hidden', tabName !== 'register');
+            
+            document.querySelectorAll('.tab').forEach(tab => {
+                tab.classList.toggle('active', tab.textContent.toLowerCase().includes(tabName));
+            });
+        }
+
+        function fakeLogin() {
+            const username = document.getElementById('login-username').value;
+            const password = document.getElementById('login-password').value;
+            
+            console.log('Фейковый вход:', { username, password });
+            alert('Это демо. Данные не отправлены!\nПроверьте консоль (F12)');
+        }
+
+        function fakeRegister() {
+            const username = document.getElementById('reg-username').value;
+            const password = document.getElementById('reg-password').value;
+            const confirm = document.getElementById('reg-confirm').value;
+            
+            if (password !== confirm) {
+                alert('Пароли не совпадают!');
+                return;
+            }
+            
+            console.log('Фейковая регистрация:', { username, password });
+            alert('Аккаунт не создан (это демо)!\nПроверьте консоль (F12)');
+        }
+    </script>
+</body>
+</html>
